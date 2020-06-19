@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle `
   }
 `;
 
-const DivContainer = styled.div `
+const DivAplicativo = styled.div `
     max-width: 600px;
     height: 100vh;
     display: flex;
@@ -19,19 +19,14 @@ const DivContainer = styled.div `
     border-style: solid;
     border-color: black;
     border-image: initial;
-    flex: 1 1 0%;
-    /* Revisar sobre flex 1 1 0% */
-`;
-
-const DivChat = styled.div `
-    display: flex;
-    flex-direction: column;
-    -webkit-box-pack: end;
+    margin: 0 auto;
     justify-content: flex-end;
-    flex: 1 1 0%;
-    padding: 20px;
 `;
 
+
+const DivContainer = styled.div `
+
+`;
 
 
 
@@ -39,11 +34,11 @@ function App() {
   return (
     <DivContainer>
 
-      <DivChat>
-        
-      </DivChat>
+      <DivAplicativo>
 
-       <Mensagem/>
+        <Mensagem/>
+
+      </DivAplicativo>
 
     </DivContainer>
   );
