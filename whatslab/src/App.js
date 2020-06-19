@@ -1,25 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled, { createGlobalStyle } from 'styled-components';
+import Mensagem from './components/Mensagem.js';
+
+const GlobalStyle = createGlobalStyle `
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+`;
+
+const DivAplicativo = styled.div `
+    max-width: 600px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-image: initial;
+    margin: 0 auto;
+    justify-content: flex-end;
+`;
+
+
+const DivContainer = styled.div `
+
+`;
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DivContainer>
+
+      <DivAplicativo>
+
+        <Mensagem/>
+
+      </DivAplicativo>
+
+    </DivContainer>
   );
 }
 
