@@ -1,25 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled, { createGlobalStyle } from 'styled-components';
+import Mensagem from './components/Mensagem.js';
+
+const GlobalStyle = createGlobalStyle `
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+`;
+
+const DivContainer = styled.div `
+    max-width: 600px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-image: initial;
+    flex: 1 1 0%;
+    /* Revisar sobre flex 1 1 0% */
+`;
+
+const DivChat = styled.div `
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    flex: 1 1 0%;
+    padding: 20px;
+`;
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DivContainer>
+
+      <DivChat>
+        
+      </DivChat>
+
+       <Mensagem/>
+
+    </DivContainer>
   );
 }
 
