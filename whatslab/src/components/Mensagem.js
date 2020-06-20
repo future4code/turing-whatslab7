@@ -62,8 +62,21 @@ const DivContainer = styled.div `
 
 const BotaoRemoverMensagem = styled.button `
     width: 10%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
     height: 20px;
-    margin-left: 5px;
+    margin-right: 10px;
+    padding: 5px 0;
+    border-radius: 8px;
+    color: #fff;
+    background-color: rgba(0,0,0,0);
+    border: solid 0.5px #fff;
+    transition: 300ms;
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    } 
 `;
 
 const DivMensagemSingle = styled.div `
@@ -107,16 +120,16 @@ class Mensagem extends React.Component {
     this.setState({valorInputMensagem: ""});
   };
 
-//   deletarMensagem = mensagemParaDeletar => {
-//     const novaListaDeMensagem = this.state.arrayMensagem.filter(item => {
-//         return item.mensagem !== mensagemParaDeletar;
-//     });
+    deletarMensagem = mensagemParaDeletar => {
+      const novaListaDeMensagem = this.state.arrayMensagem.filter(item => {
+          return item.mensagem !== mensagemParaDeletar;
+      });
 
-//     this.setState({
-//         arrayMensagem: novaListaDeMensagem
-//     });
+      this.setState({
+          arrayMensagem: novaListaDeMensagem
+      });
 
-//   };
+    };
 
   apertouEnter = (event) => {
       if (event.key === 'Enter'){
@@ -139,15 +152,15 @@ class Mensagem extends React.Component {
     
     const listaNovasMensagens = this.state.arrayMensagem.map(mensagemSingle => {
       return (
-        <DivMensagemSingle>
+        <DivMensagemSingle key={mensagemSingle.mensagem}>
             <TextoMensagem>
             <strong>{mensagemSingle.usuario}:</strong> {mensagemSingle.mensagem}
             </TextoMensagem>
-            {/* <BotaoRemoverMensagem
+            <BotaoRemoverMensagem
                 onClick={() => {
-                 this.deletarMensagem();
+                 this.deletarMensagem(mensagemSingle.mensagem);
                  }}
-            >Deletar</BotaoRemoverMensagem> */}
+            >Deletar</BotaoRemoverMensagem>
         </DivMensagemSingle>
       );
     });
