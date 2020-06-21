@@ -60,25 +60,6 @@ const DivChat = styled.div `
 const DivContainer = styled.div `
 `;
 
-const BotaoRemoverMensagem = styled.button `
-    width: 10%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    height: 20px;
-    margin-right: 10px;
-    padding: 5px 0;
-    border-radius: 8px;
-    color: #fff;
-    background-color: rgba(0,0,0,0);
-    border: solid 0.5px #fff;
-    transition: 300ms;
-    &:hover {
-      background-color: #fff;
-      color: #000;
-    } 
-`;
-
 const DivMensagemSingle = styled.div `
     display: flex;
     align-items: center;
@@ -86,6 +67,15 @@ const DivMensagemSingle = styled.div `
     border: solid 1px #fff;
     border-radius: 5px 15px 20px 20px;
     margin-bottom: 8px;
+        ${function (props) {
+          if (props.seForEu) {
+        return `
+        background-color: #666;
+        justify-content: flex-end;
+        border-radius: 15px 5px 20px 20px;
+        `
+      }
+    }}
 `;
 
 const TextoMensagem = styled.div `
@@ -152,15 +142,12 @@ class Mensagem extends React.Component {
     
     const listaNovasMensagens = this.state.arrayMensagem.map(mensagemSingle => {
       return (
-        <DivMensagemSingle key={mensagemSingle.mensagem}>
-            <TextoMensagem>
+        <DivMensagemSingle seForEu={mensagemSingle.usuario.toLowerCase() === 'eu'} key={mensagemSingle.mensagem}>
+            <TextoMensagem onDoubleClick={() => {
+                 this.deletarMensagem(mensagemSingle.mensagem);
+                 }}>
             <strong>{mensagemSingle.usuario}:</strong> {mensagemSingle.mensagem}
             </TextoMensagem>
-            <BotaoRemoverMensagem
-                onClick={() => {
-                 this.deletarMensagem(mensagemSingle.mensagem);
-                 }}
-            >Deletar</BotaoRemoverMensagem>
         </DivMensagemSingle>
       );
     });
