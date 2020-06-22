@@ -1,17 +1,51 @@
 import React from "react";
 import styled from 'styled-components';
+import send from '../imagem/send.svg';
 
 // Elementos de estilização
 const DivInputs = styled.div `
     display: flex;
+    background-color: #141414;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
 `;
 
 const ChatInput = styled.input `
     width: ${props => props.width};
+    border-radius: 10px;
+    border:none;
+    height: 37px;
+    &:focus {
+      outline: none;
+    } 
+    padding-left: 8px;
+`;
+
+
+const IconEnviar = styled.img `
+    width: 20px;
+    &:hover {
+      fill: #fff;
+    } 
 `;
 
 const BotaoEnviar = styled.button `
     width: ${props => props.width};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border:none;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: 400ms;
+    &:hover {
+      background-color: #E5E5E5;
+    } 
+    &:focus {
+      outline: none;
+    } 
 `;
 
 const DivChat = styled.div `
@@ -20,22 +54,36 @@ const DivChat = styled.div `
     -webkit-box-pack: end;
     justify-content: flex-end;
     padding: 20px;
+    background-color: #303030;
 `;
 
 const DivContainer = styled.div `
-`;
-
-const BotaoRemoverMensagem = styled.button `
-    width: 10%;
-    height: 20px;
-    margin-left: 10px;
 `;
 
 const DivMensagemSingle = styled.div `
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border: solid 1px #fff;
+    border-radius: 5px 15px 20px 20px;
+    margin-bottom: 8px;
+        ${function (props) {
+          if (props.seForEu) {
+        return `
+        background-color: #666;
+        justify-content: flex-end;
+        border-radius: 15px 5px 20px 20px;
+        `
+      }
+    }}
 `;
+
+const TextoMensagem = styled.div `
+    line-height: 1.5em;
+    padding: 5px 5px;
+    color: #fff;
+`;
+
 
 class Mensagem extends React.Component {
   state = {
@@ -44,6 +92,7 @@ class Mensagem extends React.Component {
     valorInputMensagem: "",
 
   };
+
 
   adicionarNovaMensagem = () => {
  
@@ -61,16 +110,16 @@ class Mensagem extends React.Component {
     this.setState({valorInputMensagem: ""});
   };
 
-//   deletarMensagem = mensagemParaDeletar => {
-//     const novaListaDeMensagem = this.state.arrayMensagem.filter(item => {
-//         return item.mensagem !== mensagemParaDeletar;
-//     });
+    deletarMensagem = mensagemParaDeletar => {
+      const novaListaDeMensagem = this.state.arrayMensagem.filter(item => {
+          return item.mensagem !== mensagemParaDeletar;
+      });
 
-//     this.setState({
-//         arrayMensagem: novaListaDeMensagem
-//     });
+      this.setState({
+          arrayMensagem: novaListaDeMensagem
+      });
 
-//   };
+    };
 
   apertouEnter = (event) => {
       if (event.key === 'Enter'){
@@ -93,15 +142,12 @@ class Mensagem extends React.Component {
     
     const listaNovasMensagens = this.state.arrayMensagem.map(mensagemSingle => {
       return (
-        <DivMensagemSingle>
-            <p>
+        <DivMensagemSingle seForEu={mensagemSingle.usuario.toLowerCase() === 'eu'} key={mensagemSingle.mensagem}>
+            <TextoMensagem onDoubleClick={() => {
+                 this.deletarMensagem(mensagemSingle.mensagem);
+                 }}>
             <strong>{mensagemSingle.usuario}:</strong> {mensagemSingle.mensagem}
-            </p>
-            {/* <BotaoRemoverMensagem
-                onClick={() => {
-                 this.deletarMensagem(item.mensagem);
-                 }}
-            >Deletar</BotaoRemoverMensagem> */}
+            </TextoMensagem>
         </DivMensagemSingle>
       );
     });
@@ -120,13 +166,13 @@ class Mensagem extends React.Component {
             placeholder={"Usuário"}
           />
           <ChatInput
-            width={'75%'}
+            width={'65%'}
             value={this.state.valorInputMensagem}
             onChange={this.onChangeInputMensagem}
             onKeyPress={this.apertouEnter}
             placeholder={"Mensagem"}
           />
-          <BotaoEnviar width={'10%'} onClick={this.adicionarNovaMensagem}>Enviar</BotaoEnviar>
+          <BotaoEnviar width={'10%'} onClick={this.adicionarNovaMensagem}><IconEnviar src={send} alt=""/></BotaoEnviar>
         </DivInputs>
         
       </DivContainer>
